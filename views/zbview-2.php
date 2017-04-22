@@ -1,0 +1,1 @@
+<div id="dgMap" class="dg-map"></div>
