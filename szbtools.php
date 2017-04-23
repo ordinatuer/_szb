@@ -26,7 +26,7 @@ class SZBTool
         $this->includes();
         $this->init();
     }
-    public function getInstance()
+    public static function getInstance()
     {
         if ( is_null(static::$_instance)) {
             static::$_instance = new static();
