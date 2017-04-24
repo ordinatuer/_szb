@@ -14,9 +14,26 @@ class Controller extends szb\SZBController
     
     public function admin_page()
     {
-        $flag = '';
+        $flag = get_option(SZBTool::PREFIX . 'vendor', false);
         
-        echo $this->render('yandex-admin');
+        
+        // нужен рефакторинг этого дерьма 
+        // с выносом в отдельную фабрику
+        // и наведением порядка с внешними методами Asset
+        if( !$flag ) {
+            $v = 'short';
+        }
+        
+        $cl = $v . 'Asset';
+        
+        require_once( $this->asset_path . $cl . '.php');
+        
+        $asset = new $cl(WP_PLUGIN_URL . '/'. SZBTool::NAME);
+        $asset->register();
+        $view = $asset->view();
+        // inline js может отсутствовать
+        
+        echo $this->render($view);
     }
     
     public function admin_menu()

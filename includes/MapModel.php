@@ -53,7 +53,7 @@ class MapModel
             }
         } else {
             foreach ( $this->_atts_default as $attr => $val ) {
-                $this->$attr = get_option( $attr, $val );
+                $this->$attr = get_option( SZBTool::PREFIX . $attr, $val );
             }
         }
         

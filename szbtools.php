@@ -17,6 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class SZBTool 
 {   
     const NAME = 'szbtools';
+    const PREFIX = 'szb_';
     
     private $controller;
     private static $_instance = null;
