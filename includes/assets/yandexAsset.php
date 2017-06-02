@@ -11,10 +11,10 @@ class yandexAsset extends Asset
     
     
     protected $js = [
-        'map-api' => 'https://api-maps.yandex.ru/2.1/?lang=ru_RU',
-        'map-api-on' => 'zb-y-map',
+        'yandex-map-api' => 'https://api-maps.yandex.ru/2.1/?lang=ru_RU',
+        'yandex-api-on' => 'zb-y-map',
     ];
     protected $css = [
-        'zb-y-css',
+        'y' => 'zb-y-css',
     ];
 }

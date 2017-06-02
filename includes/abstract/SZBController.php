@@ -7,7 +7,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 abstract class SZBController
 {
+    /**
+     * path to views files
+     * @var string
+     */
     protected $views = '';
+    /**
+     * path to asset file
+     * @var string
+     */
     protected $asset_path;
     
     public function __construct()
@@ -19,7 +27,7 @@ abstract class SZBController
     protected function render($view, $data = [])
     {
         ob_start();
-        require_once($this->views . $view . '.php');
+        require($this->views . $view . '.php');
         
         $_s = ob_get_contents();
         ob_end_clean();

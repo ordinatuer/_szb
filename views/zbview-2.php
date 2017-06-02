@@ -1,1 +1,1 @@
-<div id="dgMap" class="dg-map"></div>
+<div id="<?php echo $data['id']?>" class="dg-map"></div>

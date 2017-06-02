@@ -10,10 +10,10 @@ class dgAsset extends Asset
     protected $view = 'zbview-2';
     
     protected $js = [
-        'map-api' => 'http://maps.api.2gis.ru/2.0/loader.js?pkg=full',
-        'zb-dg-map',
+        'dg-map-api' => 'http://maps.api.2gis.ru/2.0/loader.js?pkg=basic',
+        'dg-api-on' => 'zb-dg-map',
     ];
     protected $css = [
-        'zb-dg-styles',
+        'dg' => 'zb-dg-styles',
     ];
 }

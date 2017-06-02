@@ -40,6 +40,12 @@ class MapModel
         $this->init();
     }
     
+    public function getAttrs()
+    {
+        return $this->attrs;
+    }
+
+
     protected function init()
     {
         if ( !isset($this->attrs['db']) OR 0 === (int)$this->attrs['db'] ) {

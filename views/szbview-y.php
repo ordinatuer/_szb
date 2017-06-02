@@ -1,1 +1,1 @@
-<div id="yMap" class="y-map"></div>
+<div id="<?php echo $data['id']; ?>" class="y-map"></div>

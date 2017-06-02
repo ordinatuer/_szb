@@ -39,7 +39,14 @@ class Asset
     {
         $this->register_asset();
     }
-    
+    /**
+     * @deprecated for M>1
+     * work for M=1
+     * @param MapModel $model
+     * @param type $name
+     * @param string $keys
+     * @return boolean
+     */
     public function in_js(MapModel $model, $name, $keys = [])
     {
         if ( [] == $keys ) {
@@ -64,7 +71,29 @@ class Asset
         
         $this->register_inline_js($js);
     }
+    /**
+     * @deprecated for M>1
+     * @param type $js
+     */
+    protected static function register_inline_js($js)
+    {
+        /**
+         * map-api HARDCODE , remove this
+         */
+        wp_add_inline_script('map-api', $js, 'after');
+    }
     
+    public static function in_js_list($handle, $js)
+    {
+        wp_add_inline_script($handle, $js, 'before');
+    }
+    
+    
+    public function getAnchor()
+    {
+        $js_scripts = array_keys($this->js);
+        return $js_scripts[0];
+    }
     protected function register_asset()
     {
         if ( [] != $this->css ) {
@@ -87,13 +116,12 @@ class Asset
             $_file = $this->path . $this->jsf . $_file . '.js';
         }
         
-        //exit($_file . ' | ' . $handle);
-        
         wp_register_script(
             $handle,
             $_file,
             [],
-            null
+            null,
+            false
         );
             
         wp_enqueue_script($handle);
@@ -110,9 +138,5 @@ class Asset
         );
         
         wp_enqueue_style($handle);
-    }
-    protected function register_inline_js($js)
-    {
-        wp_add_inline_script('map-api', $js, 'after');
     }
 }
