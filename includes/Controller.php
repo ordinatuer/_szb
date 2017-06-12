@@ -16,9 +16,22 @@ class Controller extends szb\SZBController
      */
     private $maps = [];
     
+    /**
+     * wp-handler скрипта, за которым закрепляется 
+     * вкрапление инлайнового js
+     * @var string
+     */
     private $js_anchor = '';
+    
+    /**
+     * Строка js с определением геоданных
+     * inline-js, see $js_anchor
+     * @var string
+     */
     private $js_in = '';
     
+    private $css_in = '';
+        
     protected function init()
     {
         $this->views = WP_PLUGIN_DIR . '/'. SZBTool::NAME .'/views/';
@@ -26,7 +39,7 @@ class Controller extends szb\SZBController
         add_shortcode('zb-plugin', [$this, 'zb_pl']);
         
         add_action('loop_end', function() {
-            Asset::in_js_list($this->js_anchor, $this->js_in);
+            Asset::in_js_list($this->js_anchor, $this->js_in . $this->css_in);
         });
     }
     /**
@@ -56,7 +69,12 @@ class Controller extends szb\SZBController
         if( !in_array($v, $this->vendors) ) {
             $this->vendors[] = $v;
             // публикация ресурсов
-            $asset->register();
+            
+            $res = $asset->register();
+            
+            if ( false === strpos($this->css_in, $res) ) {
+                $this->css_in .= $res;
+            }
         }
 
         if( '' === $this->js_anchor ) {
@@ -72,10 +90,6 @@ class Controller extends szb\SZBController
         
         // файл отображения
         $view = $asset->view();
-        // импорт переменных в клиентский код
-        // посредством inline-js скрипта
-        //$asset->in_js($m, 'SZB', ['lon','lat','zoom']);
-        
         
         $this->maps[$id] = $m->getAttrs();
         

@@ -15,15 +15,8 @@ class Asset
     protected $view = '';
     
     protected $path = '';
-//    protected static $instance = null;
-//    public static function register()
-//    {
-//        if ( is_null(static::$instance) ) {
-//            static::$instance = new static();
-//        }
-//        
-//        return static::$instance;
-//    }
+    
+    protected $link_tpl = '\'<link rel="stylesheet" id="%ID%-css" href="%FILE%">\'';
     
     public function __construct($path)
     {
@@ -37,7 +30,23 @@ class Asset
     
     public function register()
     {
-        $this->register_asset();
+        if ( [] != $this->js ) {
+            foreach( $this->js as $handle => $file ) {
+                $this->register_script($handle, $file);
+            }
+        }
+        
+        $str = '';
+        if ( [] != $this->css ) {
+            foreach ( $this->css as $handle => $file ) {
+                $file = $this->path . $this->cssf . $file . '.css';
+                $str .= str_replace(['%ID%', '%FILE%'], [$handle, $file], $this->link_tpl );
+                $str .= "\n";
+            }
+        }
+        
+        $str = 'document.getElementsByTagName("head")[0].innerHTML += ' . $str;
+        return $str;
     }
     /**
      * @deprecated for M>1
@@ -47,6 +56,7 @@ class Asset
      * @param string $keys
      * @return boolean
      */
+    /*
     public function in_js(MapModel $model, $name, $keys = [])
     {
         if ( [] == $keys ) {
@@ -75,20 +85,21 @@ class Asset
      * @deprecated for M>1
      * @param type $js
      */
+    /*
     protected static function register_inline_js($js)
     {
         /**
          * map-api HARDCODE , remove this
-         */
+         */ /*
         wp_add_inline_script('map-api', $js, 'after');
     }
-    
-    public static function in_js_list($handle, $js)
+    */
+    public static function in_js_list($handle, $js, $position = 'before')
     {
-        wp_add_inline_script($handle, $js, 'before');
+        wp_add_inline_script($handle, $js, $position);
     }
     
-    
+   
     public function getAnchor()
     {
         $js_scripts = array_keys($this->js);
