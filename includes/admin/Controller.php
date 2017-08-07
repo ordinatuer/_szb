@@ -12,14 +12,21 @@ class Controller extends szb\SZBController
         add_action('admin_menu', [$this, 'admin_menu']);
     }
     
+    public function admin_menu()
+    {
+        add_menu_page('Настройки SZB', 'SZB-Tools', 'edit_pages', 'szbtools', [$this, 'admin_page']);
+//        add_submenu_page('szbtools','Настройки ZB 2Gis', '2GIS', 'edit_pages', 'dg', [$this, 'admin_dg_page']);
+//        add_submenu_page('szbtools','Точные настройки ZB', 'Больше настроек', 8, 'zbtools-1', [$this, 'admin_sub_page']);
+    }
+    
     public function admin_page()
     {
-        $flag = get_option(SZBTool::PREFIX . 'vendor', false);
+        //$flag = get_option(SZBTool::PREFIX . 'vendor', false);
+        $flag = false;
         
         
-        // нужен рефакторинг этого дерьма 
-        // с выносом в отдельную фабрику
-        // и наведением порядка с внешними методами Asset
+        // нужен рефакторинг этого 
+        // с наведением порядка с внешними методами Asset
         if( !$flag ) {
             $v = 'short';
         }
@@ -36,10 +43,7 @@ class Controller extends szb\SZBController
         echo $this->render($view);
     }
     
-    public function admin_menu()
-    {
-        add_menu_page('Настройки SZB', 'SZB-Tools', 'edit_pages', 'szbtools', [$this, 'admin_page']);
-//        add_submenu_page('zbtools','Настройки ZB', 'Настройки', 8, 'zbtools', [$this, 'admin_page']);
-//        add_submenu_page('zbtools','Точные настройки ZB', 'Больше настроек', 8, 'zbtools-1', [$this, 'admin_sub_page']);
-    }
+//    public function admin_dg_page() {
+//        echo $this->render()
+//    }
 }

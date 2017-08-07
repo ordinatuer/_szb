@@ -23,7 +23,7 @@ class SZBTool
     private static $_instance = null;
     private function __construct()
     {
-        //$this->defines();
+        $this->defines();
         $this->includes();
         $this->init();
     }
@@ -51,10 +51,10 @@ class SZBTool
         $path = WP_PLUGIN_DIR . '/' . self::NAME .'/' . $asset;
         $controller = $path . '/Controller.php';
         
-        require_once($controller);
-        
-        $this->controller = new Controller();
-        
+        if( file_exists($controller) ) {
+            require_once($controller);
+            $this->controller = new Controller();
+        }
     }
     private function includes()
     {
