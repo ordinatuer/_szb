@@ -1,6 +1,3 @@
-//var coords = [54.812953, 72.884675];// Омск
-//var coords = [55.76, 37.64]; // МСК
-
 DG.then(function(){
     var coords, zoom, ID;
     
@@ -15,7 +12,13 @@ DG.then(function(){
                 zoom: 15
             });
             
-            console.log([coords, zoom, ID]);
+            if ( ZB[k]['header'] && ZB[k]['content'] ) {
+                DG.marker(coords,{
+                    title: ZB[k]['header']
+                })
+                .addTo(map)
+                .bindPopup(ZB[k]['content']);
+            }
         }
     }
 });

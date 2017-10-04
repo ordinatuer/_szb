@@ -12,6 +12,8 @@ class MapModel
     public $zoom;
     public $vendor;
     
+    
+    
     public $status = false;
     
     private $_atts_default = [
@@ -19,6 +21,8 @@ class MapModel
         'zoom' => '9',
         'lon' => '54.99244',
         'lat' => '73.36859',
+        'header' => '',
+        'content' => '',
     ]; 
     
     private $_vendors = [
