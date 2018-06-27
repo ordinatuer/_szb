@@ -16,7 +16,7 @@ class Asset
     
     protected $path = '';
     
-    protected $link_tpl = '\'<link rel="stylesheet" id="%ID%-css" href="%FILE%">\'';
+    protected $link_tpl = '\'<link rel="stylesheet" id="%ID%-css" href="%FILE%">\';';
     
     public function __construct($path)
     {
