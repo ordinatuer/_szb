@@ -1,9 +1,10 @@
 <?php
+namespace szb;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class Controller extends szb\SZBController
+class Controller extends SZBController
 {
     protected function init()
     {
@@ -34,6 +35,8 @@ class Controller extends szb\SZBController
         $cl = $v . 'Asset';
         
         require_once( $this->asset_path . $cl . '.php');
+        
+        $cl = '\szb\\' . $cl;
         
         $asset = new $cl(WP_PLUGIN_URL . '/'. SZBTool::NAME);
         $asset->register();

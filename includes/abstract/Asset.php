@@ -1,8 +1,8 @@
 <?php
+namespace szb;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-use szb\MapModel;
 
 class Asset
 {

@@ -1,5 +1,5 @@
 <?php 
-
+namespace szb;
 /**
 	* Plugin Name: SZB-Tools
 	* Plugin URI: https://szb.pluginuri.com/

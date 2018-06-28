@@ -1,9 +1,11 @@
 <?php
+namespace szb;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class Controller extends szb\SZBController
+class Controller extends SZBController
 {
     /**
      * active vendors
@@ -49,7 +51,7 @@ class Controller extends szb\SZBController
      */
     public function zb_pl($attrs = [])
     {
-        $m = new szb\MapModel($attrs);
+        $m = new MapModel($attrs);
         
         if ( false === $m->status ) {
             return $this->render('error');
@@ -64,6 +66,9 @@ class Controller extends szb\SZBController
         $cl = $v . 'Asset';
         require_once($this->asset_path . $cl . '.php');
         
+        $cl = '\szb\\' . $cl;
+        
+        //exit(' --> ' . __NAMESPACE__ . ' | ' . $cl . ' | ' . class_exists('yandexAsset'));
         $asset = new $cl(WP_PLUGIN_URL . '/'. SZBTool::NAME);
         
         if( !in_array($v, $this->vendors) ) {

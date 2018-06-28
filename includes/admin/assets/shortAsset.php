@@ -1,4 +1,5 @@
 <?php
+namespace szb;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
