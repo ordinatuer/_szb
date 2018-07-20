@@ -8,8 +8,8 @@ class Controller extends SZBController
 {
     protected function init()
     {
-        $this->views = WP_PLUGIN_DIR . '/'. SZBTool::NAME .'/views/admin/';
-        $this->asset_path = WP_PLUGIN_DIR . '/'. SZBTool::NAME .'/includes/admin/assets/';
+        $this->views = SZB_DIR .'/views/admin/';
+        $this->asset_path = SZB_DIR .'/includes/admin/assets/';
         add_action('admin_menu', [$this, 'admin_menu']);
     }
     
@@ -38,7 +38,7 @@ class Controller extends SZBController
         
         $cl = '\szb\\' . $cl;
         
-        $asset = new $cl(WP_PLUGIN_URL . '/'. SZBTool::NAME);
+        $asset = new $cl();
         $asset->register();
         $view = $asset->view();
         // inline js может отсутствовать

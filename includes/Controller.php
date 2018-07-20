@@ -36,8 +36,8 @@ class Controller extends SZBController
         
     protected function init()
     {
-        $this->views = WP_PLUGIN_DIR . '/'. SZBTool::NAME .'/views/';
-        $this->asset_path = WP_PLUGIN_DIR . '/'. SZBTool::NAME .'/includes/assets/';
+        $this->views = SZB_DIR .'/views/';
+        $this->asset_path = SZB_DIR .'/includes/assets/';
         add_shortcode('zb-plugin', [$this, 'zb_pl']);
         
         add_action('loop_end', function() {
@@ -68,8 +68,7 @@ class Controller extends SZBController
         
         $cl = '\szb\\' . $cl;
         
-        //exit(' --> ' . __NAMESPACE__ . ' | ' . $cl . ' | ' . class_exists('yandexAsset'));
-        $asset = new $cl(WP_PLUGIN_URL . '/'. SZBTool::NAME);
+        $asset = new $cl();
         
         if( !in_array($v, $this->vendors) ) {
             $this->vendors[] = $v;

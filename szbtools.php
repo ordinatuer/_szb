@@ -37,8 +37,8 @@ class SZBTool
     }
     private function defines()
     {
-        //define('SZB_DIR', plugin_dir_path(__FILE__));
-        //define('SZB_URI', plugin_dir_url(__FILE__));
+        define('SZB_DIR', WP_PLUGIN_DIR . '/'. self::NAME );
+        define('SZB_URI', WP_PLUGIN_URL . '/'. self::NAME);
     }
     private function init()
     {
@@ -48,7 +48,7 @@ class SZBTool
             $asset .= '/admin';
         }
         
-        $path = WP_PLUGIN_DIR . '/' . self::NAME .'/' . $asset;
+        $path = SZB_DIR .'/' . $asset;
         $controller = $path . '/Controller.php';
         
         if( file_exists($controller) ) {
@@ -64,4 +64,4 @@ class SZBTool
     }
 }
 
-$szb = SZBTool::getInstance();
+SZBTool::getInstance();
