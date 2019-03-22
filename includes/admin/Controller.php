@@ -16,7 +16,9 @@ class Controller extends SZBController
     public function admin_menu()
     {
         add_menu_page('Настройки SZB', 'SZB-Tools', 'edit_pages', 'szbtools', [$this, 'admin_page']);
-//        add_submenu_page('szbtools','Настройки ZB 2Gis', '2GIS', 'edit_pages', 'dg', [$this, 'admin_dg_page']);
+        //add_submenu_page('szbtools','Настройки ZB 2Gis', '2GIS', 'edit_pages', 'szbdg', [$this, 'admin_dg_page']);
+        //add_submenu_page('szbtools', 'Описание шорткода','SZB шорткод','edit_pages', 'szb_sc', [$this, 'szb_sc_page']);
+        
 //        add_submenu_page('szbtools','Точные настройки ZB', 'Больше настроек', 8, 'zbtools-1', [$this, 'admin_sub_page']);
     }
     
@@ -46,7 +48,18 @@ class Controller extends SZBController
         echo $this->render($view);
     }
     
-//    public function admin_dg_page() {
-//        echo $this->render()
-//    }
+    public function szb_sc_page()
+    {
+        
+    }
+    
+    public function admin_dg_page()
+    {
+        if ( isset($_POST['dg-admin-post']) ) {
+            require 'dgModel.php';
+            dgModel::pre();
+        }
+        
+        echo $this->render('dg-admin');
+    }
 }
